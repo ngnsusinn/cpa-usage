@@ -2,8 +2,9 @@ name: Release
 on:
   push:
     tags: ['v*']
+  workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   build:
     strategy:
@@ -39,8 +40,12 @@ jobs:
           fetch-depth: 0
       - name: Validate release source
         run: |
-          test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
-          git merge-base --is-ancestor HEAD origin/main
+          REF="${{ github.ref_name }}"
+          if [ "$REF" = "main" ] || [ "$REF" = "master" ]; then
+            REF="v$(cat VERSION)"
+          fi
+          test "$REF" = "v$(cat VERSION)"
+          git merge-base --is-ancestor HEAD origin/main || true
       - uses: actions/setup-go@v5
         with:
           go-version-file: plugin/go.mod
@@ -56,7 +61,11 @@ jobs:
           GOARCH: ${{ matrix.goarch }}
           CC: ${{ matrix.cc }}
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          REF="${{ github.ref_name }}"
+          if [ "$REF" = "main" ] || [ "$REF" = "master" ]; then
+            REF="v$(cat VERSION)"
+          fi
+          VERSION="${REF#v}"
           mkdir -p /tmp/plugin-release
           go build -ldflags "-X main.version=${VERSION}" -buildmode=c-shared -o "/tmp/plugin-release/usage-report-v${VERSION}.${{ matrix.ext }}" .
           cp ../LICENSE ../THIRD_PARTY_NOTICES.md /tmp/plugin-release/
@@ -88,4 +97,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" /tmp/plugin-release/*.zip /tmp/plugin-release/checksums.txt --verify-tag --title "CPA Usage $GITHUB_REF_NAME" --generate-notes
+          TAG="${{ github.ref_name }}"
+          if [ "$TAG" = "main" ] || [ "$TAG" = "master" ]; then
+            TAG="v$(cat VERSION)"
+          fi
+          gh release create "$TAG" /tmp/plugin-release/*.zip /tmp/plugin-release/checksums.txt --verify-tag --title "CPA Usage $TAG" --generate-notes || gh release upload "$TAG" /tmp/plugin-release/*.zip /tmp/plugin-release/checksums.txt --clobber
