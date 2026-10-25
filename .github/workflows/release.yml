@@ -63,7 +63,7 @@ jobs:
         run: |
           REF="${{ github.ref_name }}"
           if [ "$REF" = "main" ] || [ "$REF" = "master" ]; then
-            REF="v$(cat VERSION)"
+            REF="v$(cat ../VERSION)"
           fi
           VERSION="${REF#v}"
           mkdir -p /tmp/plugin-release
