@@ -3,7 +3,7 @@
 Local-first token usage dashboard for [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI), shipped as a native plugin (`.dylib`/`.so`) running inside the CPA process.
 
 - **Real-time collection**: receives every completed request through the `usage.handle` plugin callback — no polling, no data loss.
-- **Embedded dashboard**: the [cpa-usage](https://github.com/andyWang1688/cpa-usage) shadcn/ui frontend is bundled and served under `/v0/resource/plugins/usage-report/report`.
+- **Embedded dashboard**: the [cpa-usage](https://github.com/ngnsusinn/cpa-usage) shadcn/ui frontend is bundled and served under `/v0/resource/plugins/usage-report/report`.
 - **SQLite storage**: usage events are stored locally in `usage.sqlite`.
 
 ## Install via CPA Plugin Store
@@ -14,7 +14,7 @@ Add this registry to `cliproxyapi.conf`:
 plugins:
   enabled: true
   store-sources:
-    - "https://raw.githubusercontent.com/andyWang1688/cpa-usage/main/plugin-store/registry.json"
+    - "https://raw.githubusercontent.com/ngnsusinn/cpa-usage/main/plugin-store/registry.json"
   configs:
     usage-report:
       enabled: true

@@ -19,7 +19,7 @@
 plugins:
   enabled: true
   store-sources:
-    - "https://gist.githubusercontent.com/andyWang1688/dd3211dbf2af7e9c3c05f4319014ec99/raw/registry.json"
+    - "https://raw.githubusercontent.com/ngnsusinn/cpa-usage/main/plugin-store/registry.json"
   configs:
     usage-report:
       enabled: true
@@ -33,7 +33,7 @@ plugins:
 
 ### 手动安装（离线）
 
-从 [Releases](https://github.com/andyWang1688/cpa-usage/releases) 下载对应平台的 `usage-report_{version}_{goos}_{goarch}.zip`，解压后放入插件目录：
+从 [Releases](https://github.com/ngnsusinn/cpa-usage/releases) 下载对应平台的 `usage-report_{version}_{goos}_{goarch}.zip`，解压后放入插件目录：
 
 ```bash
 unzip usage-report_0.4.1_darwin_arm64.zip
