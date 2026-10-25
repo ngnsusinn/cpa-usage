@@ -7,7 +7,7 @@
 - **零额外进程**：原生动态库（`.dylib` / `.so`）运行在 CPA 进程内，无需 Python、Node.js、Docker 或独立服务。
 - 真实 shadcn/ui 界面：Token 趋势、模型 / 匿名 Key / 请求明细与筛选。
 
-**版本：v0.4.0 / CLIProxyAPI 7.x / macOS、Linux 与 Windows。MIT 开源。**
+**版本：v0.4.1 / CLIProxyAPI 7.x / macOS、Linux 与 Windows。MIT 开源。**
 
 ## 安装
 
@@ -36,9 +36,9 @@ plugins:
 从 [Releases](https://github.com/andyWang1688/cpa-usage/releases) 下载对应平台的 `usage-report_{version}_{goos}_{goarch}.zip`，解压后放入插件目录：
 
 ```bash
-unzip usage-report_0.4.0_darwin_arm64.zip
+unzip usage-report_0.4.1_darwin_arm64.zip
 mkdir -p <plugins-dir>/darwin/arm64
-cp usage-report-v0.4.0.dylib <plugins-dir>/darwin/arm64/
+cp usage-report-v0.4.1.dylib <plugins-dir>/darwin/arm64/
 # Linux 为 .so，目录名相应为 linux/amd64 或 linux/arm64
 ```
 

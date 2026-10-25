@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1
+
+- Add English UI support and language switcher button with local storage persistence.
+- Ensure release assets cover all five required platforms for plugin store installation.
+
 ## 0.4.0
 
 - Add estimated token costs to the dashboard, trends, and model/key/request details (#17). Show pricing coverage and distinguish unpriced requests from zero cost.
